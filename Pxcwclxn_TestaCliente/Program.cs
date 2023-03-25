@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Pxcwclxn_TestaCliente
+namespace Bergs.Pxc.Pxcwclxn
 {
-    class Program
+    class Principal
     {
         static void Main(string[] args)
         {
+            Console.BufferWidth = 150;
+            using (MinhaTela telaCliente = new MinhaTela(@"C:\soft\pxc\data\Pxcz01da.mdb"))
+            {
+                telaCliente.Executar();
+            }
         }
     }
 }

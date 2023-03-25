@@ -50,6 +50,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pxcwclxn_GerenciadorMensagensTeste.cs" />
+    <Compile Include="Pxcwclxn_Mensagem.cs" />
+    <Compile Include="Pxcwclxn_MinhaTela.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
