@@ -49,42 +49,104 @@ namespace Bergs.Pxc.Pxcwclxn
         /// <param name="o"></param>
         private void RN01(Object o)
         {
+            ValidaRN01_TipoDePessoaInvalido();
+            Console.WriteLine();
             ValidaRN01_PessoaFisica();
             Console.WriteLine();
             ValidaRN01_PessoaJuridica();
             Console.WriteLine();
         }
+        /// <summary>Valida RN01, com o Tipo de Pessoa = 'J' de Jurídica.</summary>
+        /// <returns>True se válido.</returns>
+        private Boolean ValidaRN01_TipoDePessoaInvalido()
+        {
+            //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
+            GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
+                "RN01",
+                "Tipo de Pessoa deve ser 'F' ou 'J'",
+                "Falha",
+                "Tipo de Pessoa = 'A', que deve ser inválido",
+                "Tipo pessoa deve ser 'F' ou 'J'.",
+                "Tipo de Pessoa validado com êxito e não deveria");
+
+            RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
+
+            //Criando novo TOCliente com os campos setados para a realização do teste de validação da RN.
+            TOCliente toCliente = new TOCliente();
+            toCliente.CodCliente = 00000000000000;
+            toCliente.NomeCliente = "Hiper Mercado";
+            toCliente.TipoPessoa = "A";
+
+            //Executando o método de inclusão para verificar a validação da RN.
+            Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
+
+            Console.WriteLine(mensageiro.TituloRegraNegocio);
+
+            if (retornoValidacao.Ok)
+            {
+                //Retornou Ok quando deveria ter retornado uma Falha.
+                Console.WriteLine(mensageiro.StatusValidacaoIncorreto);
+                return false;
+            }
+            else
+            {
+                mensageiro.SetMensagemParaOperador(retornoValidacao.Mensagem.ParaOperador);
+                Console.WriteLine(mensageiro.MensagemRetornada);
+                Console.WriteLine(mensageiro.MensagemStatusValidacao);
+                if (mensageiro.Ok)
+                {
+                    mensagens.Add(new ClienteMensagem("1", retornoValidacao.Mensagem.ParaOperador, true));
+                }
+                else
+                {
+                    mensagens.Add(new ClienteMensagem("1", String.Format("RN01 - Mensagem Errada: {0}", retornoValidacao.Mensagem.ParaOperador), false));
+                }
+                return true;
+            }
+        }
         /// <summary>Valida RN01, com o Tipo de Pessoa = 'F' de Física.</summary>
         /// <returns>True se válido.</returns>
         private Boolean ValidaRN01_PessoaFisica()
         {
+            //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
+            GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
+                "RN01",
+                "Tipo de Pessoa deve ser 'F' ou 'J'",
+                "Falha",
+                "Tipo de Pessoa Física, que deve ter CPF inválido",
+                "CPF inválido.",
+                "CPF validado com êxito e não deveria");
+
             RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
 
+            //Criando novo TOCliente com os campos setados para a realização do teste de validação da RN.
             TOCliente toCliente = new TOCliente();
             toCliente.CodCliente = 00000000000;
             toCliente.NomeCliente = "Nome Sobrenome";
             toCliente.TipoPessoa = "F";
 
+            //Executando o método de inclusão para verificar a validação da RN.
             Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
 
-            Console.WriteLine("Valida RN01 - Esperado: Falha - Tipo de Pessoa = 'F' de Física, deve ter CPF inválido");
+            Console.WriteLine(mensageiro.TituloRegraNegocio);
+
             if (retornoValidacao.Ok)
             {
-                Console.WriteLine("RN01 - ERRO - CPF validado com êxito e não deveria");
+                //Retornou Ok quando deveria ter retornado uma Falha.
+                Console.WriteLine(mensageiro.StatusValidacaoIncorreto);
                 return false;
             }
             else
             {
-                Console.WriteLine("RN01 - OK - retornou: {0}", retornoValidacao.Mensagem.ParaOperador);
-                //Mensagem não pode ser a de Tipo de Pessoa errada.
-                if (retornoValidacao.Mensagem.ParaOperador != "Tipo pessoa deve ser 'F' ou 'J'.")
+                mensageiro.SetMensagemParaOperador(retornoValidacao.Mensagem.ParaOperador);
+                Console.WriteLine(mensageiro.MensagemRetornada);
+                Console.WriteLine(mensageiro.MensagemStatusValidacao);
+                if (mensageiro.Ok)
                 {
-                    Console.WriteLine("Mensagem RN01 - OK");
                     mensagens.Add(new ClienteMensagem("1", retornoValidacao.Mensagem.ParaOperador, true));
                 }
                 else
                 {
-                    Console.WriteLine("Mensagem RN01 - Errada --------");
                     mensagens.Add(new ClienteMensagem("1", String.Format("RN01 - Mensagem Errada: {0}", retornoValidacao.Mensagem.ParaOperador), false));
                 }
                 return true;
@@ -94,33 +156,45 @@ namespace Bergs.Pxc.Pxcwclxn
         /// <returns>True se válido.</returns>
         private Boolean ValidaRN01_PessoaJuridica()
         {
+            //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
+            GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
+                "RN01",
+                "Tipo de Pessoa deve ser 'F' ou 'J'",
+                "Falha",
+                "Tipo de Pessoa Jurídica, que deve ter CNPJ inválido",
+                "CNPJ inválido.",
+                "CNPJ validado com êxito e não deveria");
+
             RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
 
+            //Criando novo TOCliente com os campos setados para a realização do teste de validação da RN.
             TOCliente toCliente = new TOCliente();
             toCliente.CodCliente = 00000000000000;
             toCliente.NomeCliente = "Hiper Mercado";
             toCliente.TipoPessoa = "J";
 
+            //Executando o método de inclusão para verificar a validação da RN.
             Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
 
-            Console.WriteLine("Valida RN01 - Falha - Tipo de Pessoa = 'J' de Jurídica, deve ter CNPJ inválido");
+            Console.WriteLine(mensageiro.TituloRegraNegocio);
+
             if (retornoValidacao.Ok)
             {
-                Console.WriteLine("RN01 - ERRO - CNPJ validado com êxito e não deveria");
+                //Retornou Ok quando deveria ter retornado uma Falha.
+                Console.WriteLine(mensageiro.StatusValidacaoIncorreto);
                 return false;
             }
             else
             {
-                Console.WriteLine("RN01 - OK - retornou: {0}", retornoValidacao.Mensagem.ParaOperador);
-                //Mensagem não pode ser a de Tipo de Pessoa errada.
-                if (retornoValidacao.Mensagem.ParaOperador != "Tipo pessoa deve ser 'F' ou 'J'.")
+                mensageiro.SetMensagemParaOperador(retornoValidacao.Mensagem.ParaOperador);
+                Console.WriteLine(mensageiro.MensagemRetornada);
+                Console.WriteLine(mensageiro.MensagemStatusValidacao);
+                if (mensageiro.Ok)
                 {
-                    Console.WriteLine("Mensagem RN01 OK");
                     mensagens.Add(new ClienteMensagem("1", retornoValidacao.Mensagem.ParaOperador, true));
                 }
                 else
                 {
-                    Console.WriteLine("Mensagem RN01 - Errada --------");
                     mensagens.Add(new ClienteMensagem("1", String.Format("RN01 - Mensagem Errada: {0}", retornoValidacao.Mensagem.ParaOperador), false));
                 }
                 return true;
@@ -136,13 +210,7 @@ namespace Bergs.Pxc.Pxcwclxn
         }
         private Boolean ValidaRN02()
         {
-            RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
-
-            TOCliente toCliente = new TOCliente();
-            toCliente.CodCliente = 00000000000;
-            toCliente.NomeCliente = "Nome Sobrenome";
-            toCliente.TipoPessoa = "F";
-
+            //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
             GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
                 "RN02",
                 "Número de CPF inválido",
@@ -152,11 +220,22 @@ namespace Bergs.Pxc.Pxcwclxn
                 "CPF validado com êxito e não deveria"
                 );
 
+            RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
+
+            //Criando novo TOCliente com os campos setados para a realização do teste de validação da RN.
+            TOCliente toCliente = new TOCliente();
+            toCliente.CodCliente = 00000000000;
+            toCliente.NomeCliente = "Nome Sobrenome";
+            toCliente.TipoPessoa = "F";
+
+            //Executando o método de inclusão para verificar a validação da RN.
             Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
 
             Console.WriteLine(mensageiro.TituloRegraNegocio);
+
             if (retornoValidacao.Ok)
             {
+                //Retornou Ok quando deveria ter retornado uma Falha.
                 Console.WriteLine(mensageiro.StatusValidacaoIncorreto);
                 return false;
             }
@@ -164,52 +243,15 @@ namespace Bergs.Pxc.Pxcwclxn
             {
                 mensageiro.SetMensagemParaOperador(retornoValidacao.Mensagem.ParaOperador);
                 Console.WriteLine(mensageiro.MensagemRetornada);
-                Console.WriteLine(mensageiro.MensagemValidacao);
-                if (retornoValidacao.Mensagem.ParaOperador == mensageiro.MensagemEsperada)
+                Console.WriteLine(mensageiro.MensagemStatusValidacao);
+                if (mensageiro.Ok)
                 {
                     //Esta é a mensagem de erro que estamos esperando.
-                    //Console.WriteLine(mensageiro.MensagemValidacaoOk);
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, true));
                 }
                 else
                 {
                     //A mensagem de erro que veio não é a esperada.
-                    //Console.WriteLine(mensageiro.MensagemValidacaoIncorreta);
-                    mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, false));
-                }
-                return true;
-            }
-        }
-        private Boolean ValidaRN02Backup()
-        {
-            RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
-
-            TOCliente toCliente = new TOCliente();
-            toCliente.CodCliente = 00000000000;
-            toCliente.NomeCliente = "Nome Sobrenome";
-            toCliente.TipoPessoa = "F";
-
-            Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
-
-            Console.WriteLine("Valida RN02 | Esperado: Falha | RN: Número de CPF inválido | Teste com: número de CPF inválido");
-            if (retornoValidacao.Ok)
-            {
-                Console.WriteLine("RN02 - ERRO - CPF validado com êxito e não deveria");
-                return false;
-            }
-            else
-            {
-                Console.WriteLine("RN02 - OK - retornou: {0}", retornoValidacao.Mensagem.ParaOperador);
-                if (retornoValidacao.Mensagem.ParaOperador == "CPF inválido.")
-                {
-                    //Esta é a mensagem de erro que estamos esperando.
-                    Console.WriteLine("Mensagem RN02 OK");
-                    mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, true));
-                }
-                else
-                {
-                    //A mensagem de erro que veio não é a esperada.
-                    Console.WriteLine("Mensagem RN02 - Errada --------");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, false));
                 }
                 return true;
@@ -225,34 +267,48 @@ namespace Bergs.Pxc.Pxcwclxn
         }
         private Boolean ValidaRN03()
         {
+            //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
+            GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
+                "RN03",
+                "Número de CNPJ inválido",
+                "Falha",
+                "Número de CNPJ inválido",
+                "CNPJ inválido.",
+                "CNPJ validado com êxito e não deveria"
+                );
+
             RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
 
+            //Criando novo TOCliente com os campos setados para a realização do teste de validação da RN.
             TOCliente toCliente = new TOCliente();
             toCliente.CodCliente = 00000000000000;
             toCliente.NomeCliente = "Nome Fantasia";
             toCliente.TipoPessoa = "J";
 
+            //Executando o método de inclusão para verificar a validação da RN.
             Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
 
-            Console.WriteLine("Valida RN03 - Falha - Numero de CNPJ inválido - Teste com número de CNPJ inválido");
+            Console.WriteLine(mensageiro.TituloRegraNegocio);
+
             if (retornoValidacao.Ok)
             {
-                Console.WriteLine("RN03 - ERRO - CNPJ validado com êxito e não deveria");
+                //Retornou Ok quando deveria ter retornado uma Falha.
+                Console.WriteLine(mensageiro.StatusValidacaoIncorreto);
                 return false;
             }
             else
             {
-                Console.WriteLine("RN03 - OK - retornou: {0}", retornoValidacao.Mensagem.ParaOperador);
-                if (retornoValidacao.Mensagem.ParaOperador == "CNPJ inválido.")
+                mensageiro.SetMensagemParaOperador(retornoValidacao.Mensagem.ParaOperador);
+                Console.WriteLine(mensageiro.MensagemRetornada);
+                Console.WriteLine(mensageiro.MensagemStatusValidacao);
+                if (mensageiro.Ok)
                 {
                     //Esta é a mensagem de erro que estamos esperando.
-                    Console.WriteLine("Mensagem RN03 OK");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, true));
                 }
                 else
                 {
                     //A mensagem de erro que veio não é a esperada.
-                    Console.WriteLine("Mensagem RN03 - Errada --------");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, false));
                 }
                 return true;
@@ -272,34 +328,48 @@ namespace Bergs.Pxc.Pxcwclxn
         }
         private Boolean ValidaRN04_NomeComMenosDeDuasPalavras()
         {
+            //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
+            GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
+                "RN04",
+                "Nome do Cliente deve ter 2 nomes",
+                "Falha",
+                "Somente 1 nome",
+                "Nome deve ter 2 (dois) nomes e no mínimo 2(duas) letras no primeiro nome.",
+                "Nome do Cliente validado com êxito e não deveria"
+                );
+
             RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
 
+            //Criando novo TOCliente com os campos setados para a realização do teste de validação da RN.
             TOCliente toCliente = new TOCliente();
             toCliente.CodCliente = 93084196087;
             toCliente.NomeCliente = "Nome";
             toCliente.TipoPessoa = "F";
 
+            //Executando o método de inclusão para verificar a validação da RN.
             Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
 
-            Console.WriteLine("Valida RN04 - Falha - Nome do Cliente deve ter 2 nomes - Teste com somente 1 nome");
+            Console.WriteLine(mensageiro.TituloRegraNegocio);
+
             if (retornoValidacao.Ok)
             {
-                Console.WriteLine("RN04 - ERRO - Nome do Cliente validado com êxito e não deveria");
+                //Retornou Ok quando deveria ter retornado uma Falha.
+                Console.WriteLine(mensageiro.StatusValidacaoIncorreto);
                 return false;
             }
             else
             {
-                Console.WriteLine("RN04 - OK - retornou: {0}", retornoValidacao.Mensagem.ParaOperador);
-                if (retornoValidacao.Mensagem.ParaOperador == "Nome deve ter 2 (dois) nomes e no mínimo 2(duas) letras no primeiro nome.")
+                mensageiro.SetMensagemParaOperador(retornoValidacao.Mensagem.ParaOperador);
+                Console.WriteLine(mensageiro.MensagemRetornada);
+                Console.WriteLine(mensageiro.MensagemStatusValidacao);
+                if (mensageiro.Ok)
                 {
                     //Esta é a mensagem de erro que estamos esperando.
-                    Console.WriteLine("Mensagem RN04 OK");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, true));
                 }
                 else
                 {
                     //A mensagem de erro que veio não é a esperada.
-                    Console.WriteLine("Mensagem RN04 - Errada --------");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, false));
                 }
                 return true;
@@ -307,34 +377,48 @@ namespace Bergs.Pxc.Pxcwclxn
         }
         private Boolean ValidaRN04_NomeComMaisDeDuasPalavras()
         {
+            //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
+            GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
+                "RN04",
+                "Nome do Cliente deve ter 2 nomes",
+                "Falha",
+                "3 nomes",
+                "Nome deve ter 2 (dois) nomes e no mínimo 2(duas) letras no primeiro nome.",
+                "Nome do Cliente validado com êxito e não deveria"
+                );
+
             RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
 
+            //Criando novo TOCliente com os campos setados para a realização do teste de validação da RN.
             TOCliente toCliente = new TOCliente();
             toCliente.CodCliente = 93084196087;
             toCliente.NomeCliente = "Nome Sobrenome TerceiroNome";
             toCliente.TipoPessoa = "F";
 
+            //Executando o método de inclusão para verificar a validação da RN.
             Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
 
-            Console.WriteLine("Valida RN04 - Falha - Nome do Cliente deve ter 2 nomes - Teste com 3 nomes");
+            Console.WriteLine(mensageiro.TituloRegraNegocio);
+
             if (retornoValidacao.Ok)
             {
-                Console.WriteLine("RN04 - ERRO - Nome do Cliente validado com êxito e não deveria");
+                //Retornou Ok quando deveria ter retornado uma Falha.
+                Console.WriteLine(mensageiro.StatusValidacaoIncorreto);
                 return false;
             }
             else
             {
-                Console.WriteLine("RN04 - OK - retornou: {0}", retornoValidacao.Mensagem.ParaOperador);
-                if (retornoValidacao.Mensagem.ParaOperador == "Nome deve ter 2 (dois) nomes e no mínimo 2(duas) letras no primeiro nome.")
+                mensageiro.SetMensagemParaOperador(retornoValidacao.Mensagem.ParaOperador);
+                Console.WriteLine(mensageiro.MensagemRetornada);
+                Console.WriteLine(mensageiro.MensagemStatusValidacao);
+                if (mensageiro.Ok)
                 {
                     //Esta é a mensagem de erro que estamos esperando.
-                    Console.WriteLine("Mensagem RN04 OK");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, true));
                 }
                 else
                 {
                     //A mensagem de erro que veio não é a esperada.
-                    Console.WriteLine("Mensagem RN04 - Errada --------");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, false));
                 }
                 return true;
@@ -344,34 +428,48 @@ namespace Bergs.Pxc.Pxcwclxn
         /// <param name="o"></param>
         private Boolean ValidaRN04_PrimeiroNomeComMenosDeDuasLetras()
         {
+            //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
+            GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
+                "RN04",
+                "Primeiro Nome do Cliente deve ter no mínimo 2 letras",
+                "Falha",
+                "Somente 1 letra",
+                "Nome deve ter 2 (dois) nomes e no mínimo 2(duas) letras no primeiro nome.",
+                "Nome do Cliente validado com êxito e não deveria"
+                );
+
             RNCliente rnCliente = this.Infra.InstanciarRN<RNCliente>();
 
+            //Criando novo TOCliente com os campos setados para a realização do teste de validação da RN.
             TOCliente toCliente = new TOCliente();
             toCliente.CodCliente = 93084196087;
             toCliente.NomeCliente = "   N   Sobrenome";
             toCliente.TipoPessoa = "F";
 
+            //Executando o método de inclusão para verificar a validação da RN.
             Retorno<Int32> retornoValidacao = rnCliente.Incluir(toCliente);
 
-            Console.WriteLine("Valida RN04 - Falha - Primeiro Nome do Cliente deve ter no mínimo 2 letras - Teste com menos de 2 letras");
+            Console.WriteLine(mensageiro.TituloRegraNegocio);
+
             if (retornoValidacao.Ok)
             {
-                Console.WriteLine("RN04 - ERRO - Nome do Cliente validado com êxito e não deveria");
+                //Retornou Ok quando deveria ter retornado uma Falha.
+                Console.WriteLine(mensageiro.StatusValidacaoIncorreto);
                 return false;
             }
             else
             {
-                Console.WriteLine("RN04 - OK - retornou: {0}", retornoValidacao.Mensagem.ParaOperador);
-                if (retornoValidacao.Mensagem.ParaOperador == "Nome deve ter 2 (dois) nomes e no mínimo 2(duas) letras no primeiro nome.")
+                mensageiro.SetMensagemParaOperador(retornoValidacao.Mensagem.ParaOperador);
+                Console.WriteLine(mensageiro.MensagemRetornada);
+                Console.WriteLine(mensageiro.MensagemStatusValidacao);
+                if (mensageiro.Ok)
                 {
                     //Esta é a mensagem de erro que estamos esperando.
-                    Console.WriteLine("Mensagem RN04 OK");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, true));
                 }
                 else
                 {
                     //A mensagem de erro que veio não é a esperada.
-                    Console.WriteLine("Mensagem RN04 - Errada --------");
                     mensagens.Add(new ClienteMensagem("2", retornoValidacao.Mensagem.ParaOperador, false));
                 }
                 return true;

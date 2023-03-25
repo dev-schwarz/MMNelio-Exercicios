@@ -5,17 +5,17 @@ namespace Bergs.Pxc.Pxcwclxn
     class GerenciadorMensagensTeste
     {
         #region Atribudos
-        /// <summary>O nome da Regra de Negócio (ex: RN01).</summary>
+        /// <summary>O nome da Regra de Negócio (ex: 'RN01').</summary>
         private readonly String nomeRegraNegocio;
         /// <summary>Uma breve descrição da Regra de Negócio.</summary>
         private readonly String descricaoRegraNegocio;
-        /// <summary>Uma breve descrição do resultado esperado pelo teste.</summary>
+        /// <summary>O que se espera do resultado do teste (ex: 'Falha' ou 'Sucesso').</summary>
         private readonly String resultadoEsperado;
-        /// <summary>Uma breve descrição de como o teste está sendo realizado.</summary>
+        /// <summary>Uma breve descrição do teste que está sendo realizado.</summary>
         private readonly String descricaoTeste;
         /// <summary>Mensagem de erro de status da validação, quando o 'Ok' retornado não era o esperado pelo teste.</summary>
-        private readonly String mensagemEsperada;
-        /// <summary>Mensagem retornada pela validação era a mensagem esperada.</summary>
+        private readonly String mensagemRetornoEsperada;
+        /// <summary>Texto a ser exibido quando a mensagem retornada pela validação era a mensagem esperada.</summary>
         private readonly String statusValidacaoIncorreto;
         /// <summary>A mensagem que espera-se que seja retornada pela validação da Regra de Negócio.</summary>
         private String mensagemParaOperador;
@@ -53,17 +53,17 @@ namespace Bergs.Pxc.Pxcwclxn
             {
                 return String.Format("{0} - Resultado do teste: {1} - Mensagem retornada: {2}",
                     this.nomeRegraNegocio,
-                    this.mensagemParaOperador == this.mensagemEsperada ? "PASSOU" : "FALHOU",
+                    this.mensagemParaOperador == this.mensagemRetornoEsperada ? "PASSOU" : "FALHOU",
                     this.mensagemParaOperador);
             }
         }
 
         /// <summary>Mensagem para exibir com o status da validação da Regra de Negócio.</summary>
-        public String MensagemValidacao
+        public String MensagemStatusValidacao
         {
             get
             {
-                if (this.mensagemParaOperador == this.mensagemEsperada)
+                if (this.mensagemParaOperador == this.mensagemRetornoEsperada)
                 {
                     return String.Format("Mensagem {0} - OK",
                         this.nomeRegraNegocio);
@@ -72,36 +72,42 @@ namespace Bergs.Pxc.Pxcwclxn
                 {
                     return String.Format("Mensagem {0} - ERRADA - Mensagem esperada era: {1}",
                         this.nomeRegraNegocio,
-                        this.mensagemEsperada);
+                        this.mensagemRetornoEsperada);
                 }
             }
         }
 
-        /// <summary>A mensagem que espera-se que seja retornada pela validação da Regra de Negócio.</summary>
-        public String MensagemEsperada
+        /// <summary>True se a mensagem que espera-se que retorne da validação for igual à mensagem efetivamente retornada.</summary>
+        public Boolean Ok
         {
-            get
-            {
-                return this.mensagemEsperada;
-            }
+            get { return this.mensagemRetornoEsperada == this.mensagemParaOperador; }
         }
+
+        /// <summary>A mensagem que espera-se que seja retornada pela validação da Regra de Negócio.</summary>
+        //public String MensagemRetornoEsperada
+        //{
+        //    get
+        //    {
+        //        return this.mensagemRetornoEsperada;
+        //    }
+        //}
         #endregion
 
         #region Construtores
         /// <summary>Cria nova instância.</summary>
         /// <param name="nomeRegraNegocio">O nome da Regra de Negócio (ex: RN01).</param>
         /// <param name="descricaoRegraNegocio">Uma breve descrição da Regra de Negócio.</param>
-        /// <param name="resultadoEsperado">Uma breve descrição do resultado esperado pelo teste.</param>
-        /// <param name="descricaoTeste">Uma breve descrição de como o teste está sendo realizado.</param>
-        /// <param name="mensagemEsperada">A mensagem que espera-se que seja retornada pela validação da Regra de Negócio.</param>
-        /// <param name="statusValidacaoIncorreta">Mensagem retornada pela validaçao foi diferente da mensagem esperada.</param>
+        /// <param name="resultadoEsperado">O que se espera do resultado do teste (ex: 'Falha' ou 'Sucesso').</param>
+        /// <param name="descricaoTeste">Uma breve descrição do teste que está sendo realizado.</param>
+        /// <param name="mensagemRetornoEsperada">A mensagem que espera-se que seja retornada pela validação da Regra de Negócio.</param>
+        /// <param name="statusValidacaoIncorreta">Texto a ser exibido quando a mensagem retornada pela validação era a mensagem esperada.</param>
         public GerenciadorMensagensTeste(String nomeRegraNegocio, String descricaoRegraNegocio, String resultadoEsperado, String descricaoTeste, String mensagemEsperada, String statusValidacaoIncorreta)
         {
             this.nomeRegraNegocio = nomeRegraNegocio;
             this.descricaoRegraNegocio = descricaoRegraNegocio;
             this.resultadoEsperado = resultadoEsperado;
             this.descricaoTeste = descricaoTeste;
-            this.mensagemEsperada = mensagemEsperada;
+            this.mensagemRetornoEsperada = mensagemEsperada;
             this.statusValidacaoIncorreto = statusValidacaoIncorreta;
         }
         #endregion
