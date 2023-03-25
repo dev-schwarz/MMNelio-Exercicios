@@ -82,15 +82,6 @@ namespace Bergs.Pxc.Pxcwclxn
         {
             get { return this.mensagemRetornoEsperada == this.mensagemParaOperador; }
         }
-
-        /// <summary>A mensagem que espera-se que seja retornada pela validação da Regra de Negócio.</summary>
-        //public String MensagemRetornoEsperada
-        //{
-        //    get
-        //    {
-        //        return this.mensagemRetornoEsperada;
-        //    }
-        //}
         #endregion
 
         #region Construtores

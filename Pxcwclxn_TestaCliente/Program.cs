@@ -7,7 +7,7 @@ namespace Bergs.Pxc.Pxcwclxn
         static void Main(string[] args)
         {
             Console.BufferWidth = 150;
-            using (MinhaTela telaCliente = new MinhaTela(@"C:\soft\pxc\data\Pxcz01da.mdb"))
+            using (TestaClienteTela telaCliente = new TestaClienteTela(@"C:\soft\pxc\data\Pxcz01da.mdb"))
             {
                 telaCliente.Executar();
             }

@@ -18,6 +18,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pxcsclxn", "Pxcsclxn_Client
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pxcwclxn_TestaCliente", "Pxcwclxn_TestaCliente\Pxcwclxn_TestaCliente.csproj", "{AEFC3224-4C8C-48BA-87BE-4E0D196F989A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pxcwxn_MenuPrincipalTestes", "Pxcwxn_MenuPrincipalTestes\Pxcwxn_MenuPrincipalTestes.csproj", "{4FBDF091-DD7D-4548-9406-8A88360B8CB7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AEFC3224-4C8C-48BA-87BE-4E0D196F989A} = {AEFC3224-4C8C-48BA-87BE-4E0D196F989A}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +45,10 @@ Global
 		{AEFC3224-4C8C-48BA-87BE-4E0D196F989A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEFC3224-4C8C-48BA-87BE-4E0D196F989A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEFC3224-4C8C-48BA-87BE-4E0D196F989A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FBDF091-DD7D-4548-9406-8A88360B8CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FBDF091-DD7D-4548-9406-8A88360B8CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FBDF091-DD7D-4548-9406-8A88360B8CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FBDF091-DD7D-4548-9406-8A88360B8CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

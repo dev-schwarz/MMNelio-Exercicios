@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 namespace Bergs.Pxc.Pxcwclxn
 {
-    class MinhaTela : AplicacaoTela
+    public class TestaClienteTela : AplicacaoTela
     {
         #region Atributos
         private List<ClienteMensagem> mensagens;
         #endregion
 
         #region Construtores
-        public MinhaTela(String caminho) : base(caminho) { }
+        public TestaClienteTela(String caminho) : base(caminho) { }
         #endregion
 
         #region Método de controle e exibição do menu de testes
@@ -31,11 +31,11 @@ namespace Bergs.Pxc.Pxcwclxn
                         new ItemMenu(new KeyValuePair<int, string>(3, "Valida RN03 - Cliente Pessoa Jurídica deve ter CNPJ válido"), RN03, false),
                         new ItemMenu(new KeyValuePair<int, string>(4, "Valida RN04 - Nome do cliente deve ter 2 nomes, e no mínimo 2 letras no primeiro nome"), RN04, false),
                         new ItemMenu(new KeyValuePair<int, string>(5, "Todos"), Todos, false),
-                        new ItemMenu(new KeyValuePair<int, string>(0, "Sair"), null, true),
+                        new ItemMenu(new KeyValuePair<int, string>(0, "Voltar"), null, true),
                     },
                     null
                     );
-                Tela.ControlaMenu("Banrisul - Programa de teste de clientes | Carlos Schwarz - 25/03/23", menu);
+                Tela.ControlaMenu("MENU DE TESTES DE CLIENTES | Banrisul | Carlos Schwarz - 25/03/23", menu);
             }
             catch (Exception ex)
             {
@@ -56,7 +56,7 @@ namespace Bergs.Pxc.Pxcwclxn
             ValidaRN01_PessoaJuridica();
             Console.WriteLine();
         }
-        /// <summary>Valida RN01, com o Tipo de Pessoa = 'J' de Jurídica.</summary>
+        /// <summary>Valida RN01, com o Tipo de Pessoa = 'A', que não deve existir e ser considerado válido.</summary>
         /// <returns>True se válido.</returns>
         private Boolean ValidaRN01_TipoDePessoaInvalido()
         {
@@ -213,9 +213,9 @@ namespace Bergs.Pxc.Pxcwclxn
             //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
             GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
                 "RN02",
-                "Número de CPF inválido",
+                "Número de CPF deve ser válido",
                 "Falha",
-                "Número de CPF inválido",
+                "Um número de CPF inválido",
                 "CPF inválido.",
                 "CPF validado com êxito e não deveria"
                 );
@@ -270,9 +270,9 @@ namespace Bergs.Pxc.Pxcwclxn
             //Criando uma instância do mensageiro, que irá nos auxiliar na hora de imprimir os textos das mensagens de validação no console para o usuário.
             GerenciadorMensagensTeste mensageiro = new GerenciadorMensagensTeste(
                 "RN03",
-                "Número de CNPJ inválido",
+                "Número de CNPJ deve ser válido",
                 "Falha",
-                "Número de CNPJ inválido",
+                "Um número de CNPJ inválido",
                 "CNPJ inválido.",
                 "CNPJ validado com êxito e não deveria"
                 );
