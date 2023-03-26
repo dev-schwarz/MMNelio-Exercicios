@@ -24,6 +24,10 @@ namespace Bergs.Pxc.Pxcbtoxn
         private CampoTabela<String> tipoPessoa;
         #endregion
 
+        #region Campos auxiliares
+        private Double valorTransacao;
+        #endregion
+
         #endregion
 
         #region Propriedades
@@ -75,6 +79,13 @@ namespace Bergs.Pxc.Pxcbtoxn
         {
             get { return tipoPessoa; }
             set { tipoPessoa = value; }
+        }
+
+        /// <summary>Campo auxiliar com o valor da transação</summary>
+        public Double ValorTransacao
+        {
+            get { return valorTransacao; }
+            set { valorTransacao = value; }
         }
         #endregion
 

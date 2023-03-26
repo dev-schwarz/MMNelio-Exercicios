@@ -6,10 +6,10 @@
     <SchemaVersion>2.0</SchemaVersion>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bergs.Pxc.Pxcsclxn</RootNamespace>
-    <AssemblyName>Pxcsclxn</AssemblyName>
+    <RootNamespace>Bergs.Pxc.Pxcscoxn</RootNamespace>
+    <AssemblyName>Pxcscoxn</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <ProjectGuid>{0D58CFB3-2186-4A3E-A1AF-B56CCB56FF9C}</ProjectGuid>
+    <ProjectGuid>{09BA14FA-1099-473C-929A-32D8D8194D60}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +38,7 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Pxcqclxn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Pxcqcoxn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
@@ -46,9 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pgm\Pxcsclxn_Cliente.cs" />
-    <Compile Include="pgm\Pxcsclxn_AssemblyInfo.cs" />
-    <Compile Include="pgm\Pxcsclxn_MensagemCliente.cs" />
+    <Compile Include="pgm\Pxcscoxn_RegrasNegocio.cs" />
+    <Compile Include="pgm\Pxcscoxn_Conta.cs" />
+    <Compile Include="pgm\Pxcscoxn_AssemblyInfo.cs" />
+    <Compile Include="pgm\Pxcscoxn_MensagemConta.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
