@@ -2,7 +2,9 @@
 <br>Treinamento Banrisul
 </h1>
 
+<div align="center">
 ## Exercícios MM4/MM5 com uso da library MMNélio
+</div>
 
 ### Instruções para executar os testes unitários com o NUnit Framework
 
@@ -12,3 +14,9 @@
 - Selecione a aba 'Browse' e pesquise por 'nunit'
 - Instale os packages 'NUnit' e 'NUnitTestAdapter'
 - Repita esses procedimentos acima para todos os projetos de testes da solução
+
+#### Para executar os testes unitários
+
+- Acesse o menu 'Test' e selecione 'Test Explorer'
+- Ou use o atalho 'Ctrl + Alt + U' para abrir o Test Explorer
+
