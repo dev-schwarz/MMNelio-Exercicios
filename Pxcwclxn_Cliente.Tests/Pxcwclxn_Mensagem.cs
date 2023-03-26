@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bergs.Pxc.Pxcwclxn
+namespace Bergs.Pxc.Pxcwclxn.Tests
 {
     class ClienteMensagem
     {

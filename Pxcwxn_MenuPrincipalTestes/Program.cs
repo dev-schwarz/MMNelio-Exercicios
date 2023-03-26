@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bergs.Pxc.Pxcwxn
 {
@@ -11,7 +7,7 @@ namespace Bergs.Pxc.Pxcwxn
         static void Main(string[] args)
         {
             Console.BufferWidth = 150;
-            using (MenuPrincipalTestesTela tela = new MenuPrincipalTestesTela(@"C:\soft\pxc\data\Pxcz01da.mdb"))
+            using (MenuPrincipalTestesTela tela = new MenuPrincipalTestesTela())
             {
                 tela.Executar();
             }

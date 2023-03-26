@@ -56,9 +56,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pxcwclxn_TestaCliente\Pxcwclxn_TestaCliente.csproj">
-      <Project>{aefc3224-4c8c-48ba-87be-4e0d196f989a}</Project>
-      <Name>Pxcwclxn_TestaCliente</Name>
+    <ProjectReference Include="..\Pxcwclxn_Cliente.Tests\Pxcwclxn_Cliente.Tests.csproj">
+      <Project>{fd6d1c37-7cf8-4ea9-ad3a-3fe7840750e5}</Project>
+      <Name>Pxcwclxn_Cliente.Tests</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

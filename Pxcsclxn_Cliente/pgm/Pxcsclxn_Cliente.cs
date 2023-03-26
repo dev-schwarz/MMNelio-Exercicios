@@ -239,7 +239,7 @@ namespace Bergs.Pxc.Pxcsclxn
         /// <returns>True se o CPF for válido.</returns>
         private Retorno<Int32> RN02_ValidaCpf(TOCliente toCliente)
         {
-            if (!Util.ValidaCpf(toCliente.CodCliente.LerConteudoOuPadrao().ToString()))
+            if (!Util.ValidaCpf(toCliente.CodCliente.LerConteudoOuPadrao().ToString().PadLeft(11, '0')))
             {
                 return this.Infra.RetornarFalha<Int32>(new MensagemCliente(TipoFalha.Falha_RN2_CpfInvalido));
             }
@@ -253,7 +253,7 @@ namespace Bergs.Pxc.Pxcsclxn
         /// <returns>True se o CNPJ for válido.</returns>
         private Retorno<Int32> RN03_ValidaCnpj(TOCliente toCliente)
         {
-            if (!Util.ValidaCnpj(toCliente.CodCliente.LerConteudoOuPadrao().ToString()))
+            if (!Util.ValidaCnpj(toCliente.CodCliente.LerConteudoOuPadrao().ToString().PadLeft(14, '0')))
             {
                 return this.Infra.RetornarFalha<Int32>(new MensagemCliente(TipoFalha.Falha_RN3_CnpjInvalido));
             }

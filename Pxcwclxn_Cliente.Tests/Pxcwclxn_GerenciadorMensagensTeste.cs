@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bergs.Pxc.Pxcwclxn
+namespace Bergs.Pxc.Pxcwclxn.Tests
 {
     class GerenciadorMensagensTeste
     {
@@ -75,6 +75,12 @@ namespace Bergs.Pxc.Pxcwclxn
                         this.mensagemRetornoEsperada);
                 }
             }
+        }
+
+        /// <summary>A mensagem que espera-se que seja retornada pela validação da Regra de Negócio.</summary>
+        public String MensagemRetornoEsperada
+        {
+            get { return this.mensagemRetornoEsperada; }
         }
 
         /// <summary>True se a mensagem que espera-se que retorne da validação for igual à mensagem efetivamente retornada.</summary>

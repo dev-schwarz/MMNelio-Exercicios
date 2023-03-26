@@ -1,5 +1,5 @@
 ﻿using Bergs.Pxc.Pxcoiexn.Interface;
-using Bergs.Pxc.Pxcwclxn;
+using Bergs.Pxc.Pxcwclxn.Tests;
 using System;
 using System.Collections.Generic;
 
@@ -7,13 +7,6 @@ namespace Bergs.Pxc.Pxcwxn
 {
     class MenuPrincipalTestesTela : AplicacaoTela
     {
-        private readonly String caminho;
-
-        public MenuPrincipalTestesTela(String caminho)
-        {
-            this.caminho = caminho;
-        }
-
         public void Executar()
         {
             try
@@ -36,7 +29,7 @@ namespace Bergs.Pxc.Pxcwxn
 
         private void TestesClientes(Object o)
         {
-            TestaClienteTela tela = new TestaClienteTela(this.caminho);
+            TestaClienteComTela tela = new TestaClienteComTela();
             tela.Executar();
         }
     }
