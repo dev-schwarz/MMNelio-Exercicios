@@ -1,6 +1,7 @@
 <h1 align="center">
-<br>Treinamento Banrisul
-<br>Exercícios MM4/MM5 com uso da library MMNélio
+<br>Treinamento
+<br>
+<br>Exercícios com uso da library MMNélio
 </h1>
 
 ### Instruções para executar os testes unitários com o NUnit Framework
